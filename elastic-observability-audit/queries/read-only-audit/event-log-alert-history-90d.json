@@ -1,0 +1,37 @@
+{
+  "_comment": "Consulta read-only (size:0 + agregacoes) contra .kibana-event-log-* para obter historico de execucao de alertas/watches nos ultimos 90 dias, sem baixar documentos individuais. Usada por scripts/read-only-audit/11-event-log-alert-history.sh e audit_collect.py::event_log_alert_history(). event.duration esta em nanosegundos no formato de evento do Kibana - converter para ms/s na analise.",
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        { "term": { "event.provider": "alerting" } },
+        { "range": { "@timestamp": { "gte": "now-90d" } } }
+      ]
+    }
+  },
+  "aggs": {
+    "by_rule": {
+      "terms": { "field": "rule.id", "size": 2000 },
+      "aggs": {
+        "by_action": {
+          "terms": { "field": "event.action", "size": 20 }
+        },
+        "by_outcome": {
+          "terms": { "field": "event.outcome", "size": 5 }
+        },
+        "avg_duration_ns": {
+          "avg": { "field": "event.duration" }
+        },
+        "first_event": {
+          "min": { "field": "@timestamp" }
+        },
+        "last_event": {
+          "max": { "field": "@timestamp" }
+        }
+      }
+    },
+    "total_events_by_action": {
+      "terms": { "field": "event.action", "size": 20 }
+    }
+  }
+}

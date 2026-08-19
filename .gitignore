@@ -1,0 +1,56 @@
+# Este repositorio versiona apenas o ferramental reutilizavel (scripts,
+# skill, metodologia). Tudo que e resultado real de uma auditoria contra um
+# cluster especifico (dados de cliente/producao, por natureza sensiveis)
+# fica de fora do controle de versao e so existe localmente, na maquina de
+# quem rodou o pipeline. Ver "Status deste repositorio" em
+# elastic-observability-audit/README.md.
+
+# Evidencia bruta coletada do cluster (JSON) e logs de coleta.
+elastic-observability-audit/evidence/*
+!elastic-observability-audit/evidence/README.md
+
+# Saida local do audit_analyze.py - especifica por ambiente/cluster.
+elastic-observability-audit/report/
+elastic-observability-audit/report-*/
+
+# Backups de configuracao real do cluster coletados durante a auditoria
+# (licenca, politicas ILM/SLM, topologia de nos, etc.) - mantem so o README
+# de metodologia da pasta versionado.
+elastic-observability-audit/current-config-backups/*
+!elastic-observability-audit/current-config-backups/README.md
+
+# Documentos de achados preenchidos com dados reais de uma auditoria
+# especifica (gerados/reescritos pelo audit_analyze.py e pelo skill
+# elastic-audit-deep-analysis a cada rodada) - README.md do pacote e a
+# metodologia em scripts/ e queries/ continuam versionados normalmente.
+elastic-observability-audit/executive-summary.md
+elastic-observability-audit/current-state-inventory.md
+elastic-observability-audit/blind-spots.md
+elastic-observability-audit/alert-fatigue-analysis.md
+elastic-observability-audit/alert-inventory.csv
+elastic-observability-audit/alert-recommendations.csv
+elastic-observability-audit/duplicate-items.md
+elastic-observability-audit/failed-and-unused-items.md
+elastic-observability-audit/performance-analysis.md
+elastic-observability-audit/data-and-mapping-analysis.md
+elastic-observability-audit/resilience-analysis.md
+elastic-observability-audit/finops-analysis.md
+elastic-observability-audit/quick-wins.md
+elastic-observability-audit/prioritized-backlog.csv
+elastic-observability-audit/remediation-plan.md
+elastic-observability-audit/implementation-guide.md
+elastic-observability-audit/validation-plan.md
+elastic-observability-audit/rollback-plan.md
+elastic-observability-audit/risks-and-dependencies.md
+elastic-observability-audit/limitations.md
+
+# Checkpoint de progresso da analise narrativa profunda (skill
+# elastic-audit-deep-analysis) - estado efemero de uma rodada de trabalho,
+# pode conter nomes de indices/regras da evidencia coletada, nao deve ser
+# versionado. Ver a secao "Checkpoint e retomada" do skill.
+elastic-observability-audit/AUDIT-PROGRESS.md
+elastic-observability-audit/AUDIT-PROGRESS-*.md
+
+# Cache de bytecode Python
+__pycache__/
+*.pyc

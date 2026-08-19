@@ -1,0 +1,4 @@
+{
+  "_comment": "Corpo usado por scripts/read-only-audit/08-watcher.sh via POST /_watcher/_query/watches. Este endpoint e semanticamente read-only (busca watches, nao os executa nem altera). Sem 'sort' propositalmente: metadata.name e um campo text sem fielddata habilitado por padrao em .watches, e ordenar por ele causa HTTP 400 (illegal_argument_exception).",
+  "size": 1000
+}

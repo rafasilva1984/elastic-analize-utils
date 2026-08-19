@@ -1,0 +1,24 @@
+{
+  "_comment": "Exemplo de consulta read-only (size:0 + agregacao) para estimar se um indice/data stream recebeu escrita recente, usando um campo de timestamp conhecido (ex: @timestamp). Ajuste o nome do campo conforme o mapping real antes de usar. Execute com GET <index>/_search e --data-binary deste arquivo (POST semantico de busca, nao altera dados).",
+  "size": 0,
+  "query": {
+    "range": {
+      "@timestamp": {
+        "gte": "now-90d/d"
+      }
+    }
+  },
+  "aggs": {
+    "docs_per_day": {
+      "date_histogram": {
+        "field": "@timestamp",
+        "calendar_interval": "day"
+      }
+    },
+    "last_doc_timestamp": {
+      "max": {
+        "field": "@timestamp"
+      }
+    }
+  }
+}
