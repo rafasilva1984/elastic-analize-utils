@@ -558,10 +558,10 @@ def main():
     backlog_html = build_backlog_section(backlog_rows, remediation)
     alert_recs_html = build_alert_recs_section(alert_rows, remediation)
 
-    cluster_title = "Auditoria Elasticsearch/Kibana"
+    cluster_title = "Elastic Cluster"
     m = re.search(r'cluster de produ[cç][aã]o Elastic Cloud "([^"]+)"', exec_summary["intro"])
     if m:
-        cluster_title = 'Cluster "{}"'.format(m.group(1))
+        cluster_title = m.group(1).strip().title()
 
     out_html = TEMPLATE.format(
         cluster_title=esc(cluster_title),
