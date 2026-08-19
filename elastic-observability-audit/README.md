@@ -64,6 +64,19 @@ modernas; `audit_collect.py` usa só a biblioteca padrão, sem `pip install`).
    Roda inteiramente na sua máquina, sem depender desta conversa — funciona
    para quantos clusters/ambientes você precisar auditar. Nada é commitado
    automaticamente.
+5. **[PROMPT DO WINDOWS — 100% OFFLINE, SEM REDE, SEM GIT]** Depois que os
+   documentos de achados (passo 4) estiverem preenchidos, gere um runbook
+   visual único em HTML (achados agrupados por prioridade, com evidência,
+   causa raiz, comando exato — nunca executado — e rollback de cada um):
+   ```bat
+   python elastic-observability-audit\scripts\read-only-audit\generate_runbook.py
+   ```
+   Resultado em `elastic-observability-audit\report\runbook.html` — um
+   arquivo HTML autocontido (sem dependências externas além de uma fonte do
+   Google Fonts), que pode ser aberto direto no navegador. **Contém os
+   mesmos dados sensíveis dos documentos de análise — não commitar nem
+   publicar publicamente sem a mesma revisão manual exigida para
+   `evidence/`.**
 
 ### Opção B — Git Bash
 
